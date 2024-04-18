@@ -1,32 +1,36 @@
-import React, {useState} from 'react';
-import { Text, View, Button, TextInput, StyleSheet, FlatList, ScrollView } from 'react-native';
+// import React, {useState} from 'react';
+// import { Text, View, Button, TextInput, StyleSheet, FlatList, ScrollView, SectionList } from 'react-native';
 
-const App = () => {
-  const [name, setName] = useState("Pamela");
-  const [city, setCity] = useState("");
-  const [display, setDisplay] = useState(false);
-  const age = 22;
-  const users = [
-    {
-      id: 1,
-      name: "Pamela",
-    },
-    {
-      id: 2,
-      name: "John",
-    },
-    {
-      id: 3,
-      name: "Jane",
-    },
-    {
-      id: 4,
-      name: "Leo",
-    }
-  ];
-  const cities = ["Durgapur", "Kolkata", "Siliguri","Mumbai"]
+// const App = () => {
+//   const [name, setName] = useState("Pamela");
+//   const [city, setCity] = useState("");
+//   const [display, setDisplay] = useState(false);
+//   const age = 22;
+//   const users = [
+//     {
+//       id: 1,
+//       name: 'Pamela',
+//       data : ['C', 'C++', 'React'],
+//     },
+//     {
+//       id: 2,
+//       name: 'John',
+//       data: ['C', 'C++', 'React'],
+//     },
+//     {
+//       id: 3,
+//       name: 'Jane',
+//       data: ['C', 'C++', 'React'],
+//     },
+//     {
+//       id: 4,
+//       name: 'Leo',
+//       data: ['C', 'C++', 'React'],
+//     },
+//   ];
+//   const cities = ["Durgapur", "Kolkata", "Siliguri","Mumbai"]
 
-  return (
+//   return (
     // <View>
     //   <Text style={{fontSize: 30}}>Hello {name}</Text>
     //   <Button title='Press Here' onPress={() => { setName("Pam") }} color={"green"}></Button>
@@ -42,17 +46,18 @@ const App = () => {
     //     }
     //     </View>
     // </View>
-    <View>
-      <Text style={{fontSize:30}}>Flat List</Text>
-      <FlatList data={users} renderItem={({ item }) => <Text style={{ fontSize: 25 }}>{item.name}</Text>} />
-      <ScrollView>
-      {
-        cities.map((city) => <Text>{city}</Text>)
-        }
-        </ScrollView>
-    </View>
-  );
-}
+    // <View>
+    //   <Text style={{fontSize:30}}>Flat List</Text>
+    //   <FlatList data={users} renderItem={({ item }) => <Text style={{ fontSize: 25 }}>{item.name}</Text>} />
+    //   <ScrollView>
+    //   {
+    //     cities.map((city) => <Text>{city}</Text>)
+    //     }
+    //     </ScrollView>
+    // </View>
+//  
+//   );
+// }
 
 // const styles = StyleSheet.create({
 //   textInput: {
@@ -68,5 +73,73 @@ const App = () => {
 //     </View>
 //   )
 // }
+
+// export default App;
+
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  SectionList,
+  StatusBar,
+} from 'react-native';
+
+const DATA = [
+  {
+    title: 'Main dishes',
+    data: ['Pizza', 'Burger', 'Risotto'],
+  },
+  {
+    title: 'Sides',
+    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+  },
+  {
+    title: 'Drinks',
+    data: ['Water', 'Coke', 'Beer'],
+  },
+  {
+    title: 'Desserts',
+    data: ['Cheese Cake', 'Ice Cream'],
+  },
+];
+
+const App = () => (
+  <SafeAreaView>
+    <SectionList
+      sections={DATA}
+      // keyExtractor={(item, index) => item + index}
+      renderItem={({item}) => (
+        <View style={styles.item}>
+          <Text style={styles.title}>{item}</Text>
+        </View>
+      )}
+      renderSectionHeader={({section: {title}}) => (
+        <Text style={styles.header}>{title}</Text>
+      )}
+    />
+  </SafeAreaView>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+  },
+  header: {
+    fontSize: 32,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+  },
+});
 
 export default App;

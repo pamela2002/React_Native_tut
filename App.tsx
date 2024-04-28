@@ -142,4 +142,6 @@ const styles = StyleSheet.create({
   },
 });
 
+// previous topics revised and use effect Hooks for life cycle methods covered
+
 export default App;

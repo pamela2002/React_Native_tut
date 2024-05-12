@@ -1,51 +1,114 @@
-import {Text, View, StyleSheet} from 'react-native';
+// import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
+
+// const App = () => {
+//   return (
+//     <View style={styles.main}>
+//       <TouchableHighlight>
+//         <Text style={styles.button}>Button</Text>
+//       </TouchableHighlight>
+//       <TouchableHighlight>
+//         <Text style={[styles.button, styles.success]}>Success</Text>
+//       </TouchableHighlight>
+//       <TouchableHighlight>
+//         <Text style={[styles.button, styles.primary]}>Primary</Text>
+//       </TouchableHighlight>
+//       <TouchableHighlight>
+//         <Text style={[styles.button, styles.warning]}>Warning</Text>
+//       </TouchableHighlight>
+//       <TouchableHighlight>
+//         <Text style={[styles.button, styles.error]}>Error</Text>
+//       </TouchableHighlight>
+//     </View>
+//   );
+// };
+// export default App;
+
+// const styles = StyleSheet.create({
+//   main: {
+//     flex: 1,
+//   },
+//   button: {
+//     padding: 10,
+//     margin: 10,
+//     backgroundColor: '#bbb',
+//     color: '#fff',
+//     textAlign: 'center',
+//     fontSize: 24,
+//     borderRadius: 10,
+//     shadowColor: 'black',
+//     elevation: 10,
+//     shadowOpacity: 1,
+//   },
+//   primary: {
+//     backgroundColor: 'blue',
+//   },
+//   warning: {
+//     backgroundColor: 'gold',
+//   },
+//   error: {
+//     backgroundColor: 'red',
+//   },
+//   success: {
+//     backgroundColor: 'green',
+//   },
+// });
+
+import {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const App = () => {
+  const [selectedRadio, setSelectedRadio] = useState(0);
   return (
     <View style={styles.main}>
-      <View style={styles.box1}>
-        <View style={styles.innerBox1}></View>
-        <View style={styles.innerBox2}></View>
-        <View style={styles.innerBox3}></View>
-      </View>
-      <View style={styles.box2}></View>
-      <View style={styles.box3}></View>
+      <TouchableOpacity onPress={() => setSelectedRadio(1)}>
+        <View style={styles.radioWrapper}>
+          <View style={styles.radio}>
+            {selectedRadio === 1 ? <View style={styles.radioBg}></View> : null}
+          </View>
+          <Text style={styles.radioText}>Radio 1</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setSelectedRadio(2)}>
+        <View style={styles.radioWrapper}>
+          <View style={styles.radio}>
+            {selectedRadio === 2 ? <View style={styles.radioBg}></View> : null}
+          </View>
+          <Text style={styles.radioText}>Radio 2</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
-export default App;
 
+export default App;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  box1: {
-    flex: 2,
-    backgroundColor: 'red',
-    flexDirection: 'row',
+  radioText: {
+    fontSize: 20,
+    color: 'skyblue',
   },
-  box2: {
-    flex: 1,
-    backgroundColor: 'green',
+  radio: {
+    height: 40,
+    width: 40,
+    borderColor: 'skyblue',
+    borderWidth: 2,
+    borderRadius: 20,
+    margin: 10,
   },
-  box3: {
-    flex: 1,
-    backgroundColor: 'blue',
-  },
-  innerBox1: {
-    flex: 1,
+  radioBg: {
     backgroundColor: 'skyblue',
-    margin: 10,
+    height: 28,
+    width: 28,
+    borderRadius: 20,
+    margin: 4,
   },
-  innerBox2: {
-    flex: 1,
-    backgroundColor: 'pink',
-    margin: 10,
-  },
-  innerBox3: {
-    flex: 1,
-    backgroundColor: 'yellow',
-    margin: 10,
-  },
+  radioWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
 });

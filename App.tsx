@@ -1,114 +1,78 @@
-// import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
+// import { useState } from 'react';
+// import {View, StyleSheet, ActivityIndicator, Button} from 'react-native';
 
 // const App = () => {
+//   const [show, setShow] = useState(false);
+//   const displayLoader = () => {
+//     setShow(true);
+//     // api call in 3 sec
+//     setTimeout(() => {
+//       setShow(false);
+//     }, 3000);
+//   }
 //   return (
 //     <View style={styles.main}>
-//       <TouchableHighlight>
-//         <Text style={styles.button}>Button</Text>
-//       </TouchableHighlight>
-//       <TouchableHighlight>
-//         <Text style={[styles.button, styles.success]}>Success</Text>
-//       </TouchableHighlight>
-//       <TouchableHighlight>
-//         <Text style={[styles.button, styles.primary]}>Primary</Text>
-//       </TouchableHighlight>
-//       <TouchableHighlight>
-//         <Text style={[styles.button, styles.warning]}>Warning</Text>
-//       </TouchableHighlight>
-//       <TouchableHighlight>
-//         <Text style={[styles.button, styles.error]}>Error</Text>
-//       </TouchableHighlight>
+//       {/* <ActivityIndicator size={"large"} color="red" animating={true} /> */}
+//       <ActivityIndicator size={80} color="green" animating={show} />
+//       <Button title='Show Loader' onPress={displayLoader}/>
 //     </View>
 //   );
 // };
+
 // export default App;
 
 // const styles = StyleSheet.create({
 //   main: {
 //     flex: 1,
-//   },
-//   button: {
-//     padding: 10,
-//     margin: 10,
-//     backgroundColor: '#bbb',
-//     color: '#fff',
-//     textAlign: 'center',
-//     fontSize: 24,
-//     borderRadius: 10,
-//     shadowColor: 'black',
-//     elevation: 10,
-//     shadowOpacity: 1,
-//   },
-//   primary: {
-//     backgroundColor: 'blue',
-//   },
-//   warning: {
-//     backgroundColor: 'gold',
-//   },
-//   error: {
-//     backgroundColor: 'red',
-//   },
-//   success: {
-//     backgroundColor: 'green',
+//     alignItems: 'center',
+//     justifyContent: 'center',
 //   },
 // });
-
 import {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Button, Modal, StyleSheet, Text} from "react-native";
 
 const App = () => {
-  const [selectedRadio, setSelectedRadio] = useState(0);
+  const [showModal, setShowModal] = useState(false);
   return (
     <View style={styles.main}>
-      <TouchableOpacity onPress={() => setSelectedRadio(1)}>
-        <View style={styles.radioWrapper}>
-          <View style={styles.radio}>
-            {selectedRadio === 1 ? <View style={styles.radioBg}></View> : null}
+      <Modal transparent={true} visible={showModal} animationType="slide">
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Button title="Close Modal" onPress={() => setShowModal(false)} />
           </View>
-          <Text style={styles.radioText}>Radio 1</Text>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedRadio(2)}>
-        <View style={styles.radioWrapper}>
-          <View style={styles.radio}>
-            {selectedRadio === 2 ? <View style={styles.radioBg}></View> : null}
-          </View>
-          <Text style={styles.radioText}>Radio 2</Text>
-        </View>
-      </TouchableOpacity>
+      </Modal>
+      <View style={styles.buttonView}>
+        <Button title="Open Modal" onPress={() => setShowModal(true)} />
+      </View>
     </View>
   );
 };
 
 export default App;
-
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    alignItems: 'center',
+  },
+  buttonView: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  centeredView: {
+    flex: 1,
     justifyContent: 'center',
-  },
-  radioText: {
-    fontSize: 20,
-    color: 'skyblue',
-  },
-  radio: {
-    height: 40,
-    width: 40,
-    borderColor: 'skyblue',
-    borderWidth: 2,
-    borderRadius: 20,
-    margin: 10,
-  },
-  radioBg: {
-    backgroundColor: 'skyblue',
-    height: 28,
-    width: 28,
-    borderRadius: 20,
-    margin: 4,
-  },
-  radioWrapper: {
-    flexDirection: 'row',
     alignItems: 'center',
+  },
+  modalView: {
+    backgroundColor: '#fff',
+    padding: 30,
+    borderRadius: 20,
+    shadowColor: 'black',
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 30,
+    marginBottom: 20,
   }
 });

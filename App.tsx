@@ -1,78 +1,63 @@
-// import { useState } from 'react';
-// import {View, StyleSheet, ActivityIndicator, Button} from 'react-native';
+// import {View, StyleSheet, Text, Pressable} from 'react-native';
 
 // const App = () => {
-//   const [show, setShow] = useState(false);
-//   const displayLoader = () => {
-//     setShow(true);
-//     // api call in 3 sec
-//     setTimeout(() => {
-//       setShow(false);
-//     }, 3000);
-//   }
 //   return (
 //     <View style={styles.main}>
-//       {/* <ActivityIndicator size={"large"} color="red" animating={true} /> */}
-//       <ActivityIndicator size={80} color="green" animating={show} />
-//       <Button title='Show Loader' onPress={displayLoader}/>
+//           <Pressable onPress={() => { console.warn("normal on press") }}
+//               onLongPress={() => { console.warn("normal on press") }}
+//               onPressIn={() => { console.warn("press in") }}
+//               onPressOut={() => { console.warn("press out") }}>
+//         <Text style={styles.pressableBtn}>Pressable</Text>
+//       </Pressable>
 //     </View>
 //   );
 // };
 
-// export default App;
-
 // const styles = StyleSheet.create({
 //   main: {
 //     flex: 1,
-//     alignItems: 'center',
 //     justifyContent: 'center',
 //   },
+//   pressableBtn: {
+//     backgroundColor: 'blue',
+//     color: '#fff',
+//       padding: 10,
+//       margin: 10,
+//       borderRadius: 10,
+//       fontSize: 20,
+//       textAlign: 'center',
+//       shadowColor: '#000',
+//     elevation: 5,
+//   },
 // });
-import {useState} from 'react';
-import {View, Button, Modal, StyleSheet, Text} from "react-native";
+
+// export default App;
+
+
+import { useState } from "react";
+import { View, StatusBar, StyleSheet, Button } from "react-native";
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false);
-  return (
-    <View style={styles.main}>
-      <Modal transparent={true} visible={showModal} animationType="slide">
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Button title="Close Modal" onPress={() => setShowModal(false)} />
-          </View>
+    const [hide, setHide] = useState(false);
+    const [barStyle, setBarStyle] = useState("default");
+    return (
+        <View style={styles.container}>
+            <StatusBar backgroundColor="orange"
+                barStyle={barStyle}
+                hidden={hide} />
+            <Button title="Toggle Status Bar" onPress={()=>{setHide(!hide)}}/>
+            <Button title="Update Style" onPress={()=>{setBarStyle("dark-content")}}/>
         </View>
-      </Modal>
-      <View style={styles.buttonView}>
-        <Button title="Open Modal" onPress={() => setShowModal(true)} />
-      </View>
-    </View>
-  );
-};
+    )
+}
+
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    }
+});
 
 export default App;
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  buttonView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalView: {
-    backgroundColor: '#fff',
-    padding: 30,
-    borderRadius: 20,
-    shadowColor: 'black',
-    elevation: 5,
-  },
-  modalText: {
-    fontSize: 30,
-    marginBottom: 20,
-  }
-});

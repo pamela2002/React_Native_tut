@@ -1,41 +1,44 @@
-// import { View, Text, StyleSheet, Platform } from "react-native";
+import { useState } from 'react';
+import { View, StyleSheet, Button, Text } from 'react-native';
 
-
-// const App = () => {
-//     return (
-//         <View>
-//             <Text style={{ fontSize: 20 }}>Platform: {Platform.OS}</Text>
-//             {
-//                 Platform.OS === "android" ?
-//                     <View style={{ backgroundColor: "green", height: 100, width: 100 }}></View> :
-//                     <View style={{ backgroundColor: "red", height: 100, width: 100 }}></View>
-//             }
-//             <Text style={styles.text}>Hello</Text>
-//             <Text style={{fontSize:20}}>{JSON.stringify(Platform)}</Text>
-//         </View>
-//     )
-// }
-
-
-
-// const styles = StyleSheet.create({
-//     text: {
-//         color: Platform.OS === "android" ? "orange" : "blue",
-//         fontSize:20,
-//     }
-// })
-
-// export default App;
-
-import { View, Text } from "react-native";
-import WebView from "react-native-webview";
 
 const App = () => {
+    const [show, setShow] = useState(false);
     return (
-       
-            <WebView source={{uri: "https://reactnative.dev/"}}/>
-        
+        <View style={styles.container}>
+            {
+                show ?
+                    <View style={styles.modal}>
+                        <View style={styles.body}>
+                            <Text>Pamela Roy choudhury</Text>
+                            <Button title='Close' onPress={() => setShow(false)}/>
+                        </View>
+                    </View> : null
+}
+            <Button title='open dialog' onPress={() => setShow(true)}/>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    modal: {
+        flex: 1,
+        backgroundColor: 'rgba(50,50,50,.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    body: {
+        backgroundColor: '#fff',
+        height: 300,
+        width: 300,
+        padding: 20,
+        justifyContent: 'flex-end',
+        borderRadius: 10
+    }
+})
 
 export default App;

@@ -1,44 +1,47 @@
-import { useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Button, Text, View} from 'react-native';
 
-
+const Stack = createNativeStackNavigator();
 const App = () => {
-    const [show, setShow] = useState(false);
-    return (
-        <View style={styles.container}>
-            {
-                show ?
-                    <View style={styles.modal}>
-                        <View style={styles.body}>
-                            <Text>Pamela Roy choudhury</Text>
-                            <Button title='Close' onPress={() => setShow(false)}/>
-                        </View>
-                    </View> : null
-}
-            <Button title='open dialog' onPress={() => setShow(true)}/>
-        </View>
-    )
-}
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: 'green',
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontSize: 25,
+          },
+        }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
-    modal: {
-        flex: 1,
-        backgroundColor: 'rgba(50,50,50,.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    body: {
-        backgroundColor: '#fff',
-        height: 300,
-        width: 300,
-        padding: 20,
-        justifyContent: 'flex-end',
-        borderRadius: 10
-    }
-})
+const Home = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{fontSize: 30}}>Home Page</Text>
+    </View>
+  );
+};
+
+const Login = props => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{fontSize: 30, alignContent: 'center'}}>Login Page</Text>
+      <Button
+        title="Go To Home Page"
+        onPress={() => props.navigation.navigate('Home')}
+      />
+    </View>
+  );
+};
 
 export default App;

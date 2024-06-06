@@ -39,21 +39,26 @@ const Headers = () => {
 
 
 
-const Home = () => {
+const Home = (props) => {
+  const { name, age } = props.route.params;
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{fontSize: 30}}>Home Page</Text>
+      <Text style={{ fontSize: 30 }}>{name}</Text>
+      <Text style={{ fontSize: 30 }}>{age}</Text>
     </View>
   );
 };
 
 const Login = (props) => {
+  const name = "Pamela";
+  const age = 22;
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ fontSize: 30, alignContent: 'center' }}>Login Page</Text>
       <Button
         title="Go To Home Page"
-        onPress={() => props.navigation.navigate('Home')}
+        onPress={() => props.navigation.navigate('Home', {name:name, age:age})}
       />
     </View>
   );
